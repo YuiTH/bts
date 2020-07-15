@@ -35,6 +35,8 @@ import matplotlib.cm
 import threading
 from tqdm import tqdm
 
+import numpy as np
+
 from bts import BtsModel
 from bts_dataloader import *
 
@@ -112,6 +114,11 @@ parser.add_argument('--garg_crop',                             help='if set, cro
 parser.add_argument('--eval_freq',                 type=int,   help='Online evaluation frequency in global steps', default=500)
 parser.add_argument('--eval_summary_directory',    type=str,   help='output directory for eval summary,'
                                                                     'if empty outputs to checkpoint folder', default='')
+
+# resume
+
+parser.add_argument('--resume',                                help='if set resume from checkpoint', action='store_true')
+parser.add_argument('--checkpoint_path',                       help='checkpoint path, only vaild when resume set to true',action='store_true')
 
 if sys.argv.__len__() == 2:
     arg_filename_with_prefix = '@' + sys.argv[1]
