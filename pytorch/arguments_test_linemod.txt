@@ -1,0 +1,10 @@
+--encoder densenet161_bts
+--data_path ../dataset
+--dataset nyu
+--filenames_file ../train_test_inputs/linemod_01.txt
+--model_name bts_nyu_v2_pytorch_densenet161
+--checkpoint_path ./models/bts_nyu_v2_pytorch_test/checkpoints/model-260500-best_log_rms_0.14032
+--input_height 480
+--input_width 640
+--max_depth 10
+
