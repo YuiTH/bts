@@ -152,7 +152,8 @@ def test(params):
             filename_image_png = save_name + '/rgb/' + lines[s].split()[0].split('/')[-1]
         else:
             scene_name = lines[s].split()[0].split('/')[0]
-            filename_pred_png = save_name + '/raw/' + scene_name + '_' + lines[s].split()[0].split('/')[1].replace(
+            # filename_pred_png = save_name + '/raw/' + scene_name + '_' + lines[s].split()[0].split('/')[1].replace(
+            filename_pred_png = save_name + '/raw/' + scene_name + '_' + lines[s].split()[0].split('/')[-1].replace(
                 '.jpg', '.png')
             filename_cmap_png = save_name + '/cmap/' + scene_name + '_' + lines[s].split()[0].split('/')[1].replace(
                 '.jpg', '.png')

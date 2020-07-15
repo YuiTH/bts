@@ -344,6 +344,7 @@ def main_worker(gpu, ngpus_per_node, args):
     num_params_update = sum([np.prod(p.shape) for p in model.parameters() if p.requires_grad])
     print("Total number of learning parameters: {}".format(num_params_update))
 
+# DDP
     if args.distributed:
         if args.gpu is not None:
             torch.cuda.set_device(args.gpu)
@@ -362,6 +363,7 @@ def main_worker(gpu, ngpus_per_node, args):
     else:
         print("Model Initialized")
 
+# best res record
     global_step = 0
     best_eval_measures_lower_better = torch.zeros(6).cpu() + 1e3
     best_eval_measures_higher_better = torch.zeros(3).cpu()
@@ -373,6 +375,7 @@ def main_worker(gpu, ngpus_per_node, args):
                                   lr=args.learning_rate, eps=args.adam_eps)
 
     model_just_loaded = False
+    # check_point
     if args.checkpoint_path != '':
         if os.path.isfile(args.checkpoint_path):
             print("Loading checkpoint '{}'".format(args.checkpoint_path))
@@ -436,6 +439,7 @@ def main_worker(gpu, ngpus_per_node, args):
         if args.distributed:
             dataloader.train_sampler.set_epoch(epoch)
 
+# core step
         for step, sample_batched in enumerate(dataloader.data):
             optimizer.zero_grad()
             before_op_time = time.time()
