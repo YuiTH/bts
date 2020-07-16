@@ -115,30 +115,26 @@ parser.add_argument('--eval_freq',                 type=int,   help='Online eval
 parser.add_argument('--eval_summary_directory',    type=str,   help='output directory for eval summary,'
                                                                     'if empty outputs to checkpoint folder', default='')
 
-# resume
-
-parser.add_argument('--resume',                                help='if set resume from checkpoint', action='store_true')
-parser.add_argument('--checkpoint_path',                       help='checkpoint path, only vaild when resume set to true',action='store_true')
-
 if sys.argv.__len__() == 2:
     arg_filename_with_prefix = '@' + sys.argv[1]
     args = parser.parse_args([arg_filename_with_prefix])
 else:
     args = parser.parse_args()
 
-if args.mode == 'train' and not args.checkpoint_path:
+# if args.mode == 'train' and not args.checkpoint_path:
+if args.mode == 'train':
     from bts import *
 
-elif args.mode == 'train' and args.checkpoint_path:
-    model_dir = os.path.dirname(args.checkpoint_path)
-    model_name = os.path.basename(model_dir)
-    import sys
-    sys.path.append(model_dir)
-    for key, val in vars(__import__(model_name)).items():
-        if key.startswith('__') and key.endswith('__'):
-            continue
-        vars()[key] = val
-
+# elif args.mode == 'train' and args.checkpoint_path:
+#     model_dir = os.path.dirname(args.checkpoint_path)
+#     model_name = os.path.basename(model_dir)
+#     import sys
+#     sys.path.append(model_dir)
+#     for key, val in vars(__import__(model_name)).items():
+#         if key.startswith('__') and key.endswith('__'):
+#             continue
+#         vars()[key] = val
+#
 
 inv_normalize = transforms.Normalize(
     mean=[-0.485/0.229, -0.456/0.224, -0.406/0.225],

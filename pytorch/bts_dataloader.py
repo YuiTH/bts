@@ -93,7 +93,7 @@ class DataLoadPreprocess(Dataset):
     
     def __getitem__(self, idx):
         sample_path = self.filenames[idx]
-        focal = float(sample_path.split()[2]) if len(sample_path.split()) > 1 else 518.8579
+        focal = float(sample_path.split()[2]) if len(sample_path.split()) > 2 else 518.8579
 
         if self.mode == 'train':
             if self.args.dataset == 'kitti' and self.args.use_right is True and random.random() > 0.5:
